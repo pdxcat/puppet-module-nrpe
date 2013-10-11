@@ -24,7 +24,7 @@ class nrpe(
   $recurse       = undef,
 ) inherits nrpe::params {
 
-  package { '$nrpe::params::nrpe_packages':
+  package { $nrpe::params::nrpe_packages:
     ensure   => installed,
     provider => $nrpe::params::nrpe_provider,
   }
