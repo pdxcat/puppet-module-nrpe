@@ -44,7 +44,7 @@ class nrpe::params {
       $nrpe_group       = 'nrpe'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
       $nrpe_config      = '/etc/nagios/nrpe.cfg'
-      $nrpe_include_dir = '/etc/nrpe.d'
+      $nrpe_include_dir = '/etc/nrpe.d/'
       $nrpe_service     = 'nrpe'
       $nrpe_packages    = [
         'nrpe',
