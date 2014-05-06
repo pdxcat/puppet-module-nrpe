@@ -63,8 +63,8 @@ class nrpe::params {
       $nrpe_include_dir = '/usr/local/etc/nrpe.d'
       $nrpe_service     = 'nrpe2'
       $nrpe_packages    = [
-        'nrpe',
-        'nagios-plugins',
+        'net-mgmt/nrpe',
+        'net-mgmt/nagios-plugins',
       ]
       $dont_blame_nrpe  = 0
     }
