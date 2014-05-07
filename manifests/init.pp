@@ -23,7 +23,6 @@ class nrpe (
   $config        = $nrpe::params::nrpe_config,
   $include_dir   = $nrpe::params::nrpe_include_dir,
   $package_name  = $nrpe::params::nrpe_packages,
-  $provider      = $nrpe::params::nrpe_provider,
   $purge         = undef,
   $recurse       = undef,
   $service_name  = $nrpe::params::nrpe_service,
@@ -32,7 +31,6 @@ class nrpe (
 
   package { $package_name:
     ensure   => installed,
-    #   provider => $provider,
   }
 
   service { 'nrpe_service':
