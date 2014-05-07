@@ -3,6 +3,7 @@ class nrpe::params {
 
   $nrpe_provider = $::osfamily ? {
     'Solaris' => pkgutil,
+    'FreeBSD' => pkg_add,
     default   => undef,
   }
 
