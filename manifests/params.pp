@@ -24,6 +24,7 @@ class nrpe::params {
         'nagios-nrpe-server',
         'nagios-plugins',
       ]
+      $dont_blame_nrpe  = 0
     }
     'Solaris': {
       $libdir           = '/opt/csw/libexec/nagios-plugins'
@@ -37,6 +38,7 @@ class nrpe::params {
         'nrpe',
         'nagios_plugins',
       ]
+      $dont_blame_nrpe  = 0
     }
     'RedHat':  {
       $libdir           = '/usr/lib64/nagios/plugins'
@@ -50,6 +52,7 @@ class nrpe::params {
         'nrpe',
         'nagios-plugins-all',
       ]
+      $dont_blame_nrpe  = 0
     }
     'FreeBSD': {
       $libdir           = '/usr/local/libexec/nagios'
@@ -60,9 +63,10 @@ class nrpe::params {
       $nrpe_include_dir = '/usr/local/etc/nrpe.d'
       $nrpe_service     = 'nrpe2'
       $nrpe_packages    = [
-        'nrpe',
-        'nagios-plugins',
+        'net-mgmt/nrpe2',
+        'net-mgmt/nagios-plugins',
       ]
+      $dont_blame_nrpe  = 0
     }
     'Suse':  {
       $libdir           = '/usr/lib/nagios/plugins'
@@ -75,6 +79,8 @@ class nrpe::params {
       $nrpe_packages    = [
         'nrpe',
         'nagios-plugins-all',
+      ]
+      $dont_blame_nrpe  = 0
     }
     default:   {
     }
