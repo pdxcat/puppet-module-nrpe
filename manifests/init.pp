@@ -29,6 +29,8 @@ class nrpe (
   $dont_blame_nrpe  = $nrpe::params::dont_blame_nrpe,
 ) inherits nrpe::params {
 
+  class_variable_set(:@@lock, Mutex.new)
+
   package { $package_name:
     ensure   => installed,
   }
