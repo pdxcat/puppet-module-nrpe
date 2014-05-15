@@ -20,6 +20,7 @@
 #
 class nrpe (
   $allowed_hosts = ['127.0.0.1'],
+  $server_name   = undef,
   $config        = $nrpe::params::nrpe_config,
   $include_dir   = $nrpe::params::nrpe_include_dir,
   $package_name  = $nrpe::params::nrpe_packages,
