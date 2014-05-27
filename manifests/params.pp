@@ -48,7 +48,7 @@ class nrpe::params {
       $nrpe_service     = 'nrpe'
       $nrpe_packages    = [
         'nrpe',
-        'nagios-plugins-all',
+        'nagios-plugins',
       ]
     }
     'FreeBSD': {
