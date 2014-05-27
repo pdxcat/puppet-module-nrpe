@@ -7,6 +7,7 @@ define nrpe::command (
   $package_name = $nrpe::params::nrpe_packages,
   $service_name = $nrpe::params::nrpe_service,
   $file_group   = $nrpe::params::nrpe_files_group,
+  $sudo_enabled = false,
 ) {
 
   file { "${include_dir}/${title}.cfg":
