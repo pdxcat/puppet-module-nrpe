@@ -19,14 +19,15 @@
 # Copyright 2013 Computer Action Team, unless otherwise noted.
 #
 class nrpe (
-  $allowed_hosts = ['127.0.0.1'],
-  $config        = $nrpe::params::nrpe_config,
-  $include_dir   = $nrpe::params::nrpe_include_dir,
-  $package_name  = $nrpe::params::nrpe_packages,
-  $provider      = $nrpe::params::nrpe_provider,
-  $purge         = undef,
-  $recurse       = undef,
-  $service_name  = $nrpe::params::nrpe_service,
+  $allowed_hosts  = ['127.0.0.1'],
+  $server_address = ['127.0.0.1'],
+  $config         = $nrpe::params::nrpe_config,
+  $include_dir    = $nrpe::params::nrpe_include_dir,
+  $package_name   = $nrpe::params::nrpe_packages,
+  $provider       = $nrpe::params::nrpe_provider,
+  $purge          = undef,
+  $recurse        = undef,
+  $service_name   = $nrpe::params::nrpe_service,
 ) inherits nrpe::params {
 
   package { $package_name:
