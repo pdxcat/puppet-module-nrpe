@@ -1,6 +1,7 @@
 #
 define nrpe::command (
   $command,
+  $sudo         = false,
   $ensure       = present,
   $include_dir  = $nrpe::params::nrpe_include_dir,
   $libdir       = $nrpe::params::libdir,
@@ -10,6 +11,7 @@ define nrpe::command (
 ) {
 
   file { "${include_dir}/${title}.cfg":
+    sudo    => $sudo,
     ensure  => $ensure,
     content => template('nrpe/command.cfg.erb'),
     owner   => root,
