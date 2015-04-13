@@ -29,7 +29,8 @@ class nrpe (
   $purge           = undef,
   $recurse         = undef,
   $service_name    = $nrpe::params::nrpe_service,
-  $dont_blame_nrpe = 0,
+  $dont_blame_nrpe = $nrpe::params::dont_blame_nrpe,
+  $command_prefix = undef,
 ) inherits nrpe::params {
 
   package { $package_name:
