@@ -109,6 +109,8 @@ class nrpe::params {
       }
     }
     default:   {
+      $dont_blame_nrpe = 0
+      $command_prefix  = undef
     }
   }
 
