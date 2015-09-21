@@ -26,6 +26,7 @@ class nrpe (
   $include_dir     = $nrpe::params::nrpe_include_dir,
   $package_name    = $nrpe::params::nrpe_packages,
   $provider        = $nrpe::params::nrpe_provider,
+  $manage_package  = true,
   $purge           = undef,
   $recurse         = undef,
   $service_name    = $nrpe::params::nrpe_service,
@@ -41,9 +42,11 @@ class nrpe (
   $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
 ) inherits nrpe::params {
 
-  package { $package_name:
-    ensure   => installed,
-    provider => $nrpe::params::provider,
+  if $manage_package {
+    package { $package_name:
+      ensure   => installed,
+      provider => $nrpe::params::provider,
+    }
   }
 
   service { 'nrpe_service':
