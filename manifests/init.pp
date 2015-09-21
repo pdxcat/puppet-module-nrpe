@@ -43,7 +43,7 @@ class nrpe (
 
   package { $package_name:
     ensure   => installed,
-    provider => $nrpe::params::provider,
+    provider => $provider,
   }
 
   service { 'nrpe_service':
