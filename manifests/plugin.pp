@@ -11,7 +11,6 @@ define nrpe::plugin (
   $selrole      = undef,
   $seltype      = undef,
   $seluser      = undef,
- 
 ) {
   file { "${libdir}/${title}":
     ensure   => $ensure,
