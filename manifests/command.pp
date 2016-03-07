@@ -2,6 +2,7 @@
 define nrpe::command (
   $command,
   $ensure       = present,
+  $mode         = $nrpe::params::nrpe_command_file_mode,
   $include_dir  = $nrpe::include_dir,
   $package_name = $nrpe::package_name,
   $service_name = $nrpe::service_name,
@@ -15,7 +16,7 @@ define nrpe::command (
     content => template('nrpe/command.cfg.erb'),
     owner   => 'root',
     group   => $file_group,
-    mode    => '0644',
+    mode    => $mode,
     require => Package[$package_name],
     notify  => Service[$service_name],
   }
