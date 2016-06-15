@@ -40,6 +40,8 @@ class nrpe (
   $nrpe_user       = $nrpe::params::nrpe_user,
   $nrpe_group      = $nrpe::params::nrpe_group,
   $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
+  $commands = {},
+  $plugins = {},
 ) inherits nrpe::params {
 
   if $manage_package {
@@ -71,4 +73,6 @@ class nrpe (
     require => Package[$package_name],
   }
 
+  create_resources(nrpe::command, $commands)
+  create_resources(nrpe::hiera_plugin, $plugins)
 }
