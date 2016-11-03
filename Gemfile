@@ -7,7 +7,8 @@ group :development, :unit_tests do
   gem 'puppet-lint', :require => false
   gem 'simplecov', :require => false
   gem 'puppet_facts', :require => false
-  gem 'json', :require => false
+  gem 'json', '1.8.3', :require => false
+  gem 'json_pure', '2.0.1', :require => false
   gem 'metadata-json-lint', :require => false
 end
 
