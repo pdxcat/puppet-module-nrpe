@@ -28,7 +28,7 @@ define nrpe::command (
       if !defined(File[$sudoers]) {
         exec { $sudoers:
           path    => ['/bin', '/usr/bin', '/usr/local/bin' ],
-          command => "touch $sudoers",
+          command => "touch ${sudoers}",
           creates => $sudoers,
         } ->
         file { $sudoers:
