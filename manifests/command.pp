@@ -24,6 +24,12 @@ define nrpe::command (
     $context = "/files/${sudoers}"
     $spec = "spec[user = '${nrpe_user}']"
 
+    $cmd_backslash       = regsubst($command_real, "\\\\", "\\\\\\", 'G')
+    $cmd_dot             = regsubst($cmd_backslash, ':', '\:', 'G')
+    $cmd_eq              = regsubst($cmd_dot, '=', '\=', 'G')
+    $cmd_comma           = regsubst($cmd_eq, ',', '\,', 'G')
+    $cmd_sudoers_escaped = $cmd_comma
+
     if ($ensure == present) {
       if !defined(File[$sudoers]) {
         exec { $sudoers:
@@ -43,11 +49,13 @@ define nrpe::command (
         changes => [
           "set ${spec}/user ${nrpe_user}",
           "set ${spec}/host_group/host ALL",
-          "set ${spec}/host_group/command[last()+1] '${command_real}'",
+          "set ${spec}/host_group/command[last()+1] '${cmd_sudoers_escaped}'",
           "set ${spec}/host_group/command[last()]/runas_user ${sudo_user}",
           "set ${spec}/host_group/command[last()]/tag NOPASSWD",
+          "set Defaults[type = ':${nrpe_user}']/type :${nrpe_user}",
+          "clear Defaults[type = ':${nrpe_user}']/requiretty/negate",
         ],
-        onlyif  => "match ${context}/${spec}/host_group/command[. = '${command_real}'][runas_user = '${sudo_user}'][tag = 'NOPASSWD'] size == 0",
+        onlyif  => "match ${context}/${spec}/host_group/command[. = '${cmd_sudoers_escaped}'][runas_user = '${sudo_user}'][tag = 'NOPASSWD'] size == 0",
         lens    => 'Sudoers.lns',
         incl    => $sudoers,
       }
@@ -56,6 +64,7 @@ define nrpe::command (
         context => $context,
         changes => [
           "rm ${spec}",
+          "rm Defaults[type = ':${nrpe_user}']",
         ],
         onlyif  => "match ${context}/${spec}/host_group/command size == 1",
         lens    => 'Sudoers.lns',
@@ -64,7 +73,7 @@ define nrpe::command (
       augeas { "${name}_${command}_${nrpe_user}_${sudo_user}":
         context => $context,
         changes => [
-          "rm ${spec}/host_group/command[. = '${command_real}'][runas_user = '${sudo_user}'][tag = 'NOPASSWD']",
+          "rm ${spec}/host_group/command[. = '${cmd_sudoers_escaped}'][runas_user = '${sudo_user}'][tag = 'NOPASSWD']",
         ],
         onlyif  => "match ${context}/${spec}/host_group/command size > 1",
         lens    => 'Sudoers.lns',
