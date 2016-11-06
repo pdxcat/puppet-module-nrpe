@@ -24,7 +24,9 @@ define nrpe::command (
     $context = "/files/${sudoers}"
     $spec = "spec[user = '${nrpe_user}']"
 
+    # lint:ignore:double_quoted_strings
     $cmd_backslash       = regsubst($command_real, "\\\\", "\\\\\\", 'G')
+    # lint:endignore
     $cmd_dot             = regsubst($cmd_backslash, ':', '\:', 'G')
     $cmd_eq              = regsubst($cmd_dot, '=', '\=', 'G')
     $cmd_comma           = regsubst($cmd_eq, ',', '\,', 'G')
