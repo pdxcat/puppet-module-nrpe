@@ -40,6 +40,10 @@ class nrpe (
   $nrpe_user       = $nrpe::params::nrpe_user,
   $nrpe_group      = $nrpe::params::nrpe_group,
   $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
+  $manage_sudoers  = $nrpe::params::manage_sudoers,
+  $sudoers         = $nrpe::params::sudoers,
+  $sudo            = $nrpe::params::sudo,
+  $sudo_user       = $nrpe::params::sudo_user,
 ) inherits nrpe::params {
 
   if $manage_package {
