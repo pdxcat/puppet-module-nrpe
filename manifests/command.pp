@@ -30,7 +30,8 @@ define nrpe::command (
     $cmd_dot             = regsubst($cmd_backslash, ':', '\:', 'G')
     $cmd_eq              = regsubst($cmd_dot, '=', '\=', 'G')
     $cmd_comma           = regsubst($cmd_eq, ',', '\,', 'G')
-    $cmd_sudoers_escaped = $cmd_comma
+    $cmd_args            = regsubst($cmd_comma, '\$ARG[0-9]+\$', '*', 'G')
+    $cmd_sudoers_escaped = $cmd_args
 
     if ($ensure == present) {
       if !defined(File[$sudoers]) {
