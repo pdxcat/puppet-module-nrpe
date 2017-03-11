@@ -11,6 +11,10 @@ define nrpe::command (
   $sudo_user    = 'root',
 ) {
 
+  if ! defined(Class['nrpe']) {
+    fail('You must include the nrpe base class before using any nrpe defined resources')
+  }
+
   file { "${include_dir}/${title}.cfg":
     ensure  => $ensure,
     content => template('nrpe/command.cfg.erb'),

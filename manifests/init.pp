@@ -41,34 +41,15 @@ class nrpe (
   $nrpe_group      = $nrpe::params::nrpe_group,
   $nrpe_pid_file   = $nrpe::params::nrpe_pid_file,
 ) inherits nrpe::params {
+  
+  contain nrpe::repo
+  contain nrpe::install
+  contain nrpe::config
+  contain nrpe::service
 
-  if $manage_package {
-    package { $package_name:
-      ensure   => installed,
-      provider => $provider,
-    }
-  }
-
-  service { $service_name:
-    ensure    => running,
-    name      => $service_name,
-    enable    => true,
-    require   => Package[$package_name],
-    subscribe => File['nrpe_config'],
-  }
-
-  file { 'nrpe_config':
-    name    => $config,
-    content => template('nrpe/nrpe.cfg.erb'),
-    require => File['nrpe_include_dir'],
-  }
-
-  file { 'nrpe_include_dir':
-    ensure  => directory,
-    name    => $include_dir,
-    purge   => $purge,
-    recurse => $recurse,
-    require => Package[$package_name],
-  }
-
+  Class['::nrpe::repo']    ->
+  Class['::nrpe::install'] ->
+  Class['::nrpe::config']  ~>
+  Class['::nrpe::service']
+ 
 }

@@ -1,4 +1,16 @@
 {
+  "name": "pdxcat-nrpe",
+  "version": "2.1.1",
+  "author": "Computer Action Team",
+  "summary": "Puppet module for NRPE",
+  "license": "Apache-2.0",
+  "source": "https://github.com/pdxcat/puppet-module-nrpe",
+  "project_page": "https://github.com/pdxcat/puppet-module-nrpe",
+  "issues_url": "https://github.com/pdxcat/puppet-module-nrpe/issues",
+  "dependencies": [
+  
+  ],
+  "data_provider": null,
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -67,14 +79,10 @@
     {
       "name": "puppet",
       "version_requirement": ">= 3.2.0"
+    },
+    {
+      "name":"example42/yum",
+      "version_requirement":"2.x"
     }
-  ],
-  "name": "pdxcat-nrpe",
-  "version": "2.1.1",
-  "source": "https://github.com/pdxcat/puppet-module-nrpe",
-  "author": "Computer Action Team",
-  "license": "Apache-2.0",
-  "summary": "Puppet module for NRPE",
-  "project_page": "https://github.com/pdxcat/puppet-module-nrpe",
-  "dependencies": []
+  ]
 }
