@@ -53,6 +53,7 @@ class nrpe (
   $ssl_log_cipher              = false,
   $ssl_log_client_cert         = false,
   $ssl_log_client_cert_details = false,
+  $manage_pid_dir  = true,
 ) inherits nrpe::params {
 
   if $manage_package {
@@ -115,6 +116,17 @@ class nrpe (
     purge   => $purge,
     recurse => $recurse,
     require => Package[$package_name],
+  }
+
+  if $manage_pid_dir {
+    $pid_dir = dirname($nrpe_pid_file)
+    file { 'nrpe_pid_dir':
+      ensure  => directory,
+      path    => $pid_dir,
+      owner   => $nrpe_user,
+      group   => $nrpe_group,
+      require => Package[$package_name],
+    }
   }
 
 }

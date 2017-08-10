@@ -13,6 +13,7 @@ Dependencies
 
  * This module requires the EPEL repositories to be enabled
  * This module currently does not manage the firewall rules
+ * This module requires the **puppetlabs/stdlib** module
 
 ### Solaris
 

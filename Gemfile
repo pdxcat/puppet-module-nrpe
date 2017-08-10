@@ -8,7 +8,12 @@ group :development, :unit_tests do
   gem 'simplecov', :require => false
   gem 'puppet_facts', :require => false
   gem 'json', :require => false
-  gem 'metadata-json-lint', :require => false
+  # The following gems need specific versions for Ruby 1.9.3
+  gem 'metadata-json-lint', '< 2.0'
+  gem 'public_suffix', '~> 1.4.6'
+  gem 'nokogiri', '< 1.7.0'
+  gem 'mime-types', '<= 2.6.2'
+  gem 'retriable', '~> 1.4'
 end
 
 group :system_tests do
