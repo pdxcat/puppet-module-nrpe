@@ -91,20 +91,35 @@ class nrpe::params {
       $libdir           = '/usr/lib/nagios/plugins'
       $nrpe_user        = 'nagios'
       $nrpe_group       = 'nagios'
-      $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
       $nrpe_service     = 'nrpe'
       case $::operatingsystem {
         'SLES': {
-          $nrpe_config      = '/etc/nagios/nrpe.cfg'
-          $nrpe_ssl_dir     = '/etc/nagios/nrpe-ssl'
-          $nrpe_include_dir = '/etc/nagios/nrpe.d'
-          $nrpe_packages    = [
-            'nagios-nrpe',
-            'nagios-plugins',
-            'nagios-plugins-nrpe',
-          ]
+          case $::operatingsystemmajrelease {
+            '12': {
+              $nrpe_pid_file    = '/run/nrpe/nrpe.pid'
+              $nrpe_config      = '/etc/nrpe.cfg'
+              $nrpe_include_dir = '/etc/nrpe.d'
+              $nrpe_packages    = [
+                'nrpe',
+                'monitoring-plugins-all',
+                'monitoring-plugins-nrpe',
+              ]
+            }
+            # 'default' being "not less than 12"; FIXME upon release of SLES13
+            default: {
+              $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
+              $nrpe_config      = '/etc/nagios/nrpe.cfg'
+              $nrpe_include_dir = '/etc/nagios/nrpe.d'
+              $nrpe_packages    = [
+                'nagios-nrpe',
+                'nagios-plugins',
+                'nagios-plugins-nrpe',
+              ]
+            }
+          }
         }
         default:   {
+          $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
           $nrpe_config      = '/etc/nrpe.cfg'
           $nrpe_ssl_dir     = '/etc/nrpe-ssl'
           $nrpe_include_dir = '/etc/nrpe.d'
