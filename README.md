@@ -57,3 +57,4 @@ This define can be used to install nrpe plugins
           ensure => present,
           source => 'puppet:///files/check_mem',
     }
+arsth
