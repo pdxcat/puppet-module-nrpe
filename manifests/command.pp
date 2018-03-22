@@ -7,6 +7,7 @@ define nrpe::command (
   $service_name = $nrpe::service_name,
   $libdir       = $nrpe::params::libdir,
   $file_group   = $nrpe::params::nrpe_files_group,
+  $file_mode    = '0644',
   $sudo         = false,
   $sudo_user    = 'root',
 ) {
@@ -16,7 +17,7 @@ define nrpe::command (
     content => template('nrpe/command.cfg.erb'),
     owner   => 'root',
     group   => $file_group,
-    mode    => '0644',
+    mode    => $file_mode,
     require => Package[$package_name],
     notify  => Service[$service_name],
   }
