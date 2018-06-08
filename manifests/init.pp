@@ -60,13 +60,14 @@ class nrpe (
       ensure   => installed,
       provider => $provider,
     }
+    Package[$package_name] -> Service[$service_name]
+    Package[$package_name] -> File['nrpe_include_dir']
   }
 
   service { $service_name:
     ensure    => running,
     name      => $service_name,
     enable    => true,
-    require   => Package[$package_name],
     subscribe => File['nrpe_config'],
   }
 
@@ -114,7 +115,6 @@ class nrpe (
     name    => $include_dir,
     purge   => $purge,
     recurse => $recurse,
-    require => Package[$package_name],
   }
 
 }
