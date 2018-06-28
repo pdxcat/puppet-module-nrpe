@@ -12,6 +12,7 @@ class nrpe::params {
   }
 
   $nrpe_plugin_file_mode = '0755'
+  $nrpe_command_file_mode = '0644'
 
   case $::osfamily {
     'Debian':  {
