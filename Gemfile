@@ -8,7 +8,11 @@ group :development, :unit_tests do
   gem 'simplecov', :require => false
   gem 'puppet_facts', :require => false
   gem 'json', :require => false
-  gem 'metadata-json-lint', :require => false
+  if RUBY_VERSION < '2.0.0'
+    gem 'metadata-json-lint', '~> 1.1.0',  :require => false
+  else
+    gem 'metadata-json-lint', '~> 2.2.0',  :require => false
+  end
 end
 
 group :system_tests do
